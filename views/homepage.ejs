@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <h1>Welcome to the Questionnaire API</h1>
+    <h1>Welcome, <%= username %></h1>
+
+    <div class="con3">
+    <div class="lef">        
+    <h2>Available Tests:</h2>
+    <ul>
+        <% tests.forEach(test => { %>
+            <li>
+                <a href="/api/test/<%= test._id %>/questions"><%= test.title %></a>
+            </li>
+        <% }); %>
+    </ul>
+    </div>
+    <div class="rig">
+    <a href="/api/profile">profile</a><br><br>
+    <!-- Logout link -->
+    <a href="/api/logout">Logout</a>
+</div>
+</div>
+</body>
+</html>

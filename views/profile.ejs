@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Welcome, <%= user.name %>!</h1>
+  <div class="con4">
+    <div class="con2">
+  <p>User ID: <%= user._id %></p>
+  <p>Email: <%= user.email %></p>
+  <p data-field="phone_number">Phone Number: <%= user.phone_number %></p>
+  <button id="editPhoneButton">Edit Phone Number</button>
+  <div id="phoneModal" style="display: none;">
+    <h3>Edit Phone Number</h3>
+    <form id="editPhoneForm">
+      <input type="text" name="phone_number" value="<%= user.phone_number %>">
+      <button type="submit">Save</button>
+    </form>
+    <button id="closeModalButton">Close</button>
+  </div>
+
+  <h2>Test History:</h2>
+  <% if (userResponses.length > 0) { %>
+    <ul>
+      <% userResponses.forEach((response) => { %>
+        <li>
+          Test: <%= response.testId.title %>
+          Score: <%= response.score %>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No test history available.</p>
+  <% } %>
+  <br>
+  <button><a href="/homepage">homepage</a></button>
+</div>
+</div>
+  
+  <script>
+    const editPhoneButton = document.getElementById('editPhoneButton');
+    const phoneModal = document.getElementById('phoneModal');
+    const closeModalButton = document.getElementById('closeModalButton');
+    const editPhoneForm = document.getElementById('editPhoneForm');
+
+    editPhoneButton.addEventListener('click', () => {
+      phoneModal.style.display = 'block';
+    });
+
+    closeModalButton.addEventListener('click', () => {
+      phoneModal.style.display = 'none';
+    });
+
+    editPhoneForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(editPhoneForm);
+      const phoneNumber = formData.get('phone_number');
+        console.log(phoneNumber)
+      try {
+        const response = await fetch('/api/edit/phonenumber', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ phone_number: phoneNumber }),
+        });
+
+        if (response.ok) {
+          document.querySelector('p[data-field="phone_number"]').textContent = "Phone Number: "+phoneNumber;
+          phoneModal.style.display = 'none';
+        } else {
+          console.error('Phone number update failed');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  </script>
+</body>
+</html>

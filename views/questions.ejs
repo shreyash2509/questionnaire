@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questions</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    
+    <h1>Test: <%= test.title %></h1>
+    <div class="con">
+        <div class="con2">
+
+    <% if (hasSubmitted) { %>
+        <div id="modal" style="display: block;">
+            <h1>You have already submitted the test.</h1>
+        <button><a href="/homepage">homepage</a></button>
+        </div>
+    <% } else { %>
+    <form id="testForm" action="/api/submit-test" method="POST">
+        <% questions.forEach((question) => { %>
+            <h3><%= question.text %></h3>
+            <% question.answers.forEach((answer) => { %>
+                <label>
+                    <input type="radio" name="answers[<%= question._id %>]" value="<%= answer %>">
+                    <%= answer %>
+                </label><br>
+            <% }) %>
+            <br>
+        <% }) %>
+        <input type="hidden" name="testId" value="<%= test._id %>">
+        <input type="submit" value="Submit">
+    </form>
+    <% } %>
+        </div>
+        </div>  
+    <script>
+        // Close the modal when the close button is clicked
+        const modal = document.getElementById('modal');
+        if (modal) {
+            const closeButton = modal.querySelector('.close-button');
+            closeButton.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+        }
+
+        // Form validation
+        const form = document.getElementById('testForm');
+        form.addEventListener('submit', (event) => {
+            const radios = form.querySelectorAll('input[type="radio"]');
+            let isAnyOptionSelected = false;
+
+            radios.forEach((radio) => {
+                if (radio.checked) {
+                    isAnyOptionSelected = true;
+                }
+            });
+
+            if (!isAnyOptionSelected) {
+                event.preventDefault();
+                alert('Please select an option for each question.');
+            }
+        });
+    </script>
+</body>
+</html>

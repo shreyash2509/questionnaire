@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Details</title>
+</head>
+<body>
+    <h1>Test: <%= test.name %></h1>
+
+    <h2>Questions:</h2>
+    <ul>
+        <% test.questions.forEach(question => { %>
+            <li><%= question.text %></li>
+        <% }); %>
+    </ul>
+</body>
+</html>

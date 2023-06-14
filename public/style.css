@@ -1,0 +1,85 @@
+h1{
+  text-align: center;
+}
+
+body{
+  background-color: antiquewhite;
+}
+
+.con{
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  /* justify-content: center; */
+}
+
+.con2{
+  margin-top: 40px;
+  padding: 6px 77px 95px 77px;
+  background: aliceblue;
+  border-radius: 14%;
+  border: solid 0.5px #e1d3d3;
+}
+
+.con2 input{
+  width: 108%;
+  /* border: none; */
+  /* border-bottom: black; */
+  /* border-bottom-color: black; */
+  padding: 10px;
+}
+.con2 button{
+  padding: 10px 11px;
+  border-radius: 15%;
+  border: solid 0.2px;
+}
+.con2 form{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.con3{
+  
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.lef{font-size: larger;}
+.rig{
+  font-size: 20px;
+}
+
+a{
+  color: black;
+  
+
+}
+
+.con4{
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    /* justify-content: center; */
+}
+
+.con2 #testForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: flex-start;
+}
+.con2 #testForm label{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.con2 #testForm label input{
+  width: 13%;
+}
